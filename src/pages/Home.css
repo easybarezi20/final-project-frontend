@@ -1,12 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 .home-container{
-    background-color: red;
     height: 90vh;
 }
 .home-logo{
-    border: 2px solid black;
+    text-align: center;
     height: 5vh;
+    color: white;
+    font-family: 'Satisfy', cursive;
+    font-size: xx-large;
 }
 .home-content{
-    border: 2px solid black;
+    
+    overflow: hidden;
+    overflow-y: scroll;
     height: 84vh;
+    color: white;
+}
+.content-image{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+.image-button{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(319deg) brightness(103%) contrast(101%);
+    height: 25px;
+    margin: 0 5px;
 }
