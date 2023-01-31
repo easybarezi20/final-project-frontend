@@ -3,7 +3,14 @@ import './Home.css'
 
 function Home() {
   return (
-    <div className='home'>Home</div>
+    <div className='home-container'>
+        <div className='home-logo'>
+            <p>Logo Here</p>
+        </div>
+        <div className='home-content'>
+            Content Here
+        </div>
+    </div>
   )
 }
 

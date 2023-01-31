@@ -1,4 +1,12 @@
-.home{
+.home-container{
     background-color: red;
     height: 90vh;
+}
+.home-logo{
+    border: 2px solid black;
+    height: 5vh;
+}
+.home-content{
+    border: 2px solid black;
+    height: 84vh;
 }
