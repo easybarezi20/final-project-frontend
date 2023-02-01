@@ -1,28 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-.home-container{
-    height: 90vh;
-}
-.home-logo{
-    text-align: center;
-    height: 5vh;
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+
+.home{
     color: white;
-    font-family: 'Satisfy', cursive;
-    font-size: xx-large;
+    /* border: 1px solid red; */
+    height: 92vh;
+}
+.home-title{
+    font-family: 'Grand Hotel', cursive;
+    font-size: 40px;
+    text-align: center;
 }
 .home-content{
-    
-    overflow: hidden;
-    overflow-y: scroll;
-    height: 84vh;
-    color: white;
-}
-.content-image{
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-}
-.image-button{
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(319deg) brightness(103%) contrast(101%);
-    height: 25px;
-    margin: 0 5px;
+    border: 1px solid red;
+    height: 85vh;
 }

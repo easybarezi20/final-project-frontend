@@ -1,0 +1,19 @@
+.signup{
+    color: white;
+    /* border: 1px solid red; */
+    height: 92vh;
+}
+.signup-form{
+    /* border: 1px solid red; */
+    margin: 90px 20px 20px 20px;
+    height: 65vh;
+    display: grid;
+}
+input, button{
+    height: 30px;
+    margin: 0 20px;
+}
+.link-tag{
+    text-align: center;
+    color: rgb(110, 115, 115);
+}

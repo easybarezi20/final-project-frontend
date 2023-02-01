@@ -1,0 +1,10 @@
+.post{
+    color: white;
+    border: 1px solid red;
+    height: 92vh;
+}
+.post-container{
+    border: 1px solid red;
+    margin: 90px 20px 20px 20px;
+    height: 65vh;
+}
