@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { UserContext } from '../App'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
+  const {state, dispatch} = useContext(UserContext)
   const navigate = useNavigate()
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
@@ -24,9 +26,18 @@ function Login() {
         .then(data =>{
             localStorage.setItem("jwt", data.token)
             localStorage.setItem("user", JSON.stringify(data.user))
-            console.log(data);
-            navigate('/')
+            dispatch({type:"USER", payload:data.user})
+            console.log(localStorage.getItem("jwt"));
+            if(data.token === undefined){
+              localStorage.clear()
+              navigate('/login')
+            }else{
+              navigate('/')
+            }
         })
+        
+          
+        
     }
 
   return (
@@ -40,7 +51,7 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             />
             <input
-            type="text"
+            type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

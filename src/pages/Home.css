@@ -4,6 +4,7 @@
     color: white;
     /* border: 1px solid red; */
     height: 92vh;
+    overflow: hidden;
 }
 .home-title{
     font-family: 'Grand Hotel', cursive;
@@ -11,6 +12,18 @@
     text-align: center;
 }
 .home-content{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 85vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.image-photo{
+    max-width: 100%;
+}
+.icons{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(319deg) brightness(103%) contrast(101%);
+}
+.icon-image{
+    height: 20px;
+    margin: 0 0 0 5px;
 }

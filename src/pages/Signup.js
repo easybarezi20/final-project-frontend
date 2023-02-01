@@ -49,7 +49,7 @@ function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             />
             <input
-            type="text"
+            type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
