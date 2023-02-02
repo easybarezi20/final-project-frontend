@@ -1,36 +1,38 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../App'
 import './Profile.css'
 
-function Profile() {
-    const { state, dispatch } = useContext(UserContext)
-    const navigate = useNavigate()
-    const [ myposts, setMyPosts ] = useState([])
-
+function UserProfile() {
+    // const { state, dispatch } = useContext(UserContext)
+    // const navigate = useNavigate()
+    const [ userProfile, setUserProfile ] = useState(null)
+    const { id } = useParams()
     useEffect(() => {
-        fetch("http://localhost:4000/posts/mypost",{
+        fetch(`http://localhost:4000/getuser/user/${id}`,{
+            method:"GET",
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem('jwt')
             }
         }).then(res => res.json())
         .then(result => {
-            console.log(result.mypost);
-            setMyPosts(result.mypost)
+            setUserProfile(result)
         })
     },[])
-    const objLen = Object.keys(myposts).length
   return (
-    <div className='profile'>
+    <>
+    {
+        userProfile ? 
+        <div className='profile'>
         <div className='username'>
-            {state.name}
+            {userProfile.user.name}
         </div>
         <div className='information-box'>
             <div className='profile-image'>
                 <img src='https://images.squarespace-cdn.com/content/v1/53ed0e3ce4b0c296acaeae80/1584577511464-8FDZYWQVXUI1OBS4VTZP/Bonneville14082-Edit-DHWEB%2BNick%2BFerguson%2BDenver%2BBroncos%2BHeadshot%2BPhotography%2Bby%2BAaron%2BLucy%2BDenver%2BColorado%2BHeadshots%2BPhotographer.jpg?format=2500w' className='image'/>
             </div>
             <div>
-                <p>{objLen}</p>
+                <p>{userProfile.posts.length}</p>
                 Posts
             </div>
             <div>
@@ -51,7 +53,7 @@ function Profile() {
         </div>
         <div className='posts'>
             {
-                myposts.map(item => {
+                userProfile.posts.map(item => {
                     return(
                         <div className='posts-container'>
                             <img key={item._id} src={item.photo} className="posts-photo" alt={item.title}/>
@@ -60,8 +62,12 @@ function Profile() {
                 })
             }
         </div>
-    </div>
+        </div>
+        :
+        <h2>Loading.....</h2>
+    }
+    </>
   )
 }
 
-export default Profile
+export default UserProfile

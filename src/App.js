@@ -7,8 +7,10 @@ import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+
 import { reducer, initialState } from './reducers/userReducer'
 import Footer from './components/Footer';
+import UserProfile from './pages/UserProfile';
 
 
 export const UserContext = createContext()
@@ -28,6 +30,7 @@ const Routing = () => {
   },[])
   return(
       <Routes>
+        <Route path='/profile/:id' element={<UserProfile/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/explore' element={<Explore/>} />
         <Route path='/post' element={<Post/>} />

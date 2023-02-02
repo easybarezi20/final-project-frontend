@@ -1,9 +1,11 @@
 import React, {useContext} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../App';
 import './Footer.css'
 import { Link } from 'react-router-dom'
 
 function Footer() {
+    const navigate = useNavigate()
     const { state, dispatch } = useContext(UserContext)
     const renderList = () => {
         if(state){
@@ -25,8 +27,18 @@ function Footer() {
                 </div>,
                 <div className='profile-button'>
                     <Link to='/profile'>
-                        <img src='https://cdn-icons-png.flaticon.com/128/3405/3405771.png' alt='home' className='footer-button'/>
+                        <img src='https://cdn-icons-png.flaticon.com/128/1077/1077114.png' alt='home' className='footer-button'/>
                     </Link>
+                </div>,
+                <div className='profile-button'>
+                    <img src='https://cdn-icons-png.flaticon.com/128/660/660350.png' alt='home' className='footer-button'
+                    onClick={() => {
+                        localStorage.clear()
+                        dispatch({type:"CLEAR"})
+                        navigate('/login')
+                    }}
+                    />
+                    
                 </div>,
             ]
         }

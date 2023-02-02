@@ -27,3 +27,11 @@
     height: 20px;
     margin: 0 0 0 5px;
 }
+.home-header{
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+}
+.delete-button{
+    margin-right: 5px;
+}
