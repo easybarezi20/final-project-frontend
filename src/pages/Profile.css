@@ -28,7 +28,7 @@
 .posts{
     border: 1px solid red;
     height: fit-content;
-    height: 66.5vh;
+    height: 64vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: max-content;
@@ -41,4 +41,9 @@
 }
 .posts-photo{
     max-height: 100%;
+}
+.follow-button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 85%;
 }

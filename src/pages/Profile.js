@@ -1,12 +1,51 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../App'
 import './Profile.css'
 
 function Profile() {
     const { state, dispatch } = useContext(UserContext)
-    const navigate = useNavigate()
     const [ myposts, setMyPosts ] = useState([])
+    const [ image, setImage ] = useState("")
+    const [ url, setURL ] = useState("")
+
+    const updatePhoto = (file) =>{
+        setImage(file) 
+    }
+
+    useEffect(() => {
+        if(image){
+            const data = new FormData()
+            data.append("file", image)
+            data.append("upload_preset", "final-project")
+            data.append("cloud_name", "dayu9uhsv")
+            fetch("http://api.cloudinary.com/v1_1/dayu9uhsv/image/upload", {
+                method:"POST",
+                body:data
+            })
+            .then(res => res.json())
+            .then(data => {
+                fetch("http://localhost:4000/getuser/updatepic",{
+                    method:"PUT",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":"Bearer " + localStorage.getItem("jwt")
+                    },
+                    body:JSON.stringify({
+                        pic:data.url
+                    })
+                }).then(res => res.json())
+                .then(result =>{
+                    console.log(result);
+                    localStorage.setItem("user", JSON.stringify({...state, pic:result.pic}))
+                    dispatch({type:"UPDATEPIC", payload:result.pic})
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            }) 
+            }
+    },[image])
+
 
     useEffect(() => {
         fetch("http://localhost:4000/posts/mypost",{
@@ -23,7 +62,7 @@ function Profile() {
   return (
     <div className='profile'>
         <div className='username'>
-            {state.name}
+            {state != null ? state.name : "Loading"}
         </div>
         <div className='information-box'>
             <div className='profile-image'>
@@ -34,20 +73,20 @@ function Profile() {
                 Posts
             </div>
             <div>
-                <p>{state?state.followers.length : "0"}</p>
+                <p>{state.followers != undefined && null ?state.followers.length : "0"}</p>
                 Followers
             </div>
             <div>
-                <p>{state?state.following.length : "0"}</p>
+                <p>{state.following != undefined && null ?state.following.length : "0"}</p>
                 Following
             </div>
         </div>
         <div className='profile-buttons'>
-                <button
-                    
-                >
-                    Edit Profile
-                </button>
+                <input
+                    type="file"
+                    onChange={(e) => updatePhoto(e.target.files[0])}
+                />
+                
         </div>
         <div className='posts'>
             {

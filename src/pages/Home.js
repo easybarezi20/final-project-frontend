@@ -26,7 +26,6 @@ function Home() {
             }
         }).then(res => res.json())
         .then(result => {
-            // console.log(result);
             setPosts(result.posts)
         })
     }
@@ -127,7 +126,7 @@ function Home() {
     }
     console.log(state);
     useEffect(() => {
-        if(state.following.length === 0){
+        if(state.following.length === 0 && state != null){
             getAllPosts()
         }else{
             getFollowingPosts()

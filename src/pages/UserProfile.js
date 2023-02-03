@@ -102,21 +102,18 @@ function UserProfile() {
                 Following
             </div>
         </div>
-        <div className='profile-buttons'>
-                <button
-                    
-                >
-                    Edit Profile
-                </button>
-                {showFollow ?
+        <div>
+            {showFollow ?
                 <button
                     onClick={() => followUser()}
+                    className="follow-button"
                 >
                     Follow
                 </button>
                 :
                 <button
                     onClick={() => unfollowUser()}
+                    className="follow-button"
                 >
                     Unfollow
                 </button>
