@@ -19,7 +19,7 @@ function Profile() {
             setMyPosts(result.mypost)
         })
     },[])
-    const objLen = Object.keys(myposts).length
+    // const objLen = Object.keys(myposts).length
   return (
     <div className='profile'>
         <div className='username'>
@@ -27,18 +27,18 @@ function Profile() {
         </div>
         <div className='information-box'>
             <div className='profile-image'>
-                <img src='https://images.squarespace-cdn.com/content/v1/53ed0e3ce4b0c296acaeae80/1584577511464-8FDZYWQVXUI1OBS4VTZP/Bonneville14082-Edit-DHWEB%2BNick%2BFerguson%2BDenver%2BBroncos%2BHeadshot%2BPhotography%2Bby%2BAaron%2BLucy%2BDenver%2BColorado%2BHeadshots%2BPhotographer.jpg?format=2500w' className='image'/>
+                <img src={state ? state.pic : "loading"} className='image'/>
             </div>
             <div>
-                <p>{objLen}</p>
+                <p>{myposts.length}</p>
                 Posts
             </div>
             <div>
-                <p>4000</p>
+                <p>{state?state.followers.length : "0"}</p>
                 Followers
             </div>
             <div>
-                <p>4000</p>
+                <p>{state?state.following.length : "0"}</p>
                 Following
             </div>
         </div>

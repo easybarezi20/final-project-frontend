@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { UserContext } from '../App'
 import './Profile.css'
 
 function UserProfile() {
-    // const { state, dispatch } = useContext(UserContext)
-    // const navigate = useNavigate()
+    const { state, dispatch } = useContext(UserContext)
     const [ userProfile, setUserProfile ] = useState(null)
     const { id } = useParams()
+    const [ showFollow, setShowFollow ] = useState(state? !state.following.includes(id) : true)
     useEffect(() => {
         fetch(`http://localhost:4000/getuser/user/${id}`,{
             method:"GET",
@@ -16,9 +16,67 @@ function UserProfile() {
             }
         }).then(res => res.json())
         .then(result => {
+            
             setUserProfile(result)
         })
     },[])
+
+    const followUser = () => {
+        fetch('http://localhost:4000/getuser/follow',{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer " + localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                followId: id,
+            })   
+        }).then(res => res.json())
+        .then(data => {
+            
+            dispatch({type:"UPDATE", payload:{following:data.following, followers:data.followers}})
+            localStorage.setItem("user", JSON.stringify(data))
+            setUserProfile(prevState =>{
+                return {
+                    ...prevState,
+                    user:{
+                        ...prevState.user,
+                        followers:[...prevState.user.followers, data._id]
+                    }
+                }
+            })
+            setShowFollow(false)
+        })
+    }
+    const unfollowUser = () => {
+        fetch('http://localhost:4000/getuser/unfollow',{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer " + localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                unfollowId: id,
+            })   
+        }).then(res => res.json())
+        .then(data => {
+            
+            dispatch({type:"UPDATE", payload:{following:data.following, followers:data.followers}})
+            localStorage.setItem("user", JSON.stringify(data)) 
+            setUserProfile(prevState =>{
+                const newFollower = prevState.user.followers.filter(item => item !== data._id)
+                return {
+                    ...prevState,
+                    user:{
+                        ...prevState.user,
+                        followers:newFollower
+                    }
+                }
+            })
+            setShowFollow(true)
+        })
+    }
+    console.log(showFollow);
   return (
     <>
     {
@@ -29,18 +87,18 @@ function UserProfile() {
         </div>
         <div className='information-box'>
             <div className='profile-image'>
-                <img src='https://images.squarespace-cdn.com/content/v1/53ed0e3ce4b0c296acaeae80/1584577511464-8FDZYWQVXUI1OBS4VTZP/Bonneville14082-Edit-DHWEB%2BNick%2BFerguson%2BDenver%2BBroncos%2BHeadshot%2BPhotography%2Bby%2BAaron%2BLucy%2BDenver%2BColorado%2BHeadshots%2BPhotographer.jpg?format=2500w' className='image'/>
+                <img src={userProfile.user.pic} className='image'/>
             </div>
             <div>
                 <p>{userProfile.posts.length}</p>
                 Posts
             </div>
             <div>
-                <p>4000</p>
+                <p>{userProfile.user.followers.length}</p>
                 Followers
             </div>
             <div>
-                <p>4000</p>
+                <p>{userProfile.user.following.length}</p>
                 Following
             </div>
         </div>
@@ -50,6 +108,19 @@ function UserProfile() {
                 >
                     Edit Profile
                 </button>
+                {showFollow ?
+                <button
+                    onClick={() => followUser()}
+                >
+                    Follow
+                </button>
+                :
+                <button
+                    onClick={() => unfollowUser()}
+                >
+                    Unfollow
+                </button>
+                }
         </div>
         <div className='posts'>
             {

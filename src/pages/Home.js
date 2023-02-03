@@ -7,7 +7,19 @@ import './Home.css'
 function Home() {
     const [ posts, setPosts ] = useState([])
     const {state, dispatch} = useContext(UserContext)
-    useEffect(() => {
+
+    const getFollowingPosts = () => {
+        fetch('http://localhost:4000/posts/getfollowpost',{
+            headers:{
+                "Authorization":"Bearer " + localStorage.getItem("jwt")
+            }
+        }).then(res => res.json())
+        .then(result => {
+            // console.log(result);
+            setPosts(result.posts)
+        })
+    }
+    const getAllPosts = () => {
         fetch('http://localhost:4000/posts/allpost',{
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem("jwt")
@@ -17,7 +29,7 @@ function Home() {
             // console.log(result);
             setPosts(result.posts)
         })
-    },[])
+    }
 
     const likePost = (id) =>{
         fetch("http://localhost:4000/posts/like",{
@@ -113,6 +125,14 @@ function Home() {
                 setPosts(newData)
         })
     }
+    console.log(state);
+    useEffect(() => {
+        if(state.following.length === 0){
+            getAllPosts()
+        }else{
+            getFollowingPosts()
+        }
+    },[])
   return (
     <div className='home'>
         <div className='home-title'>
@@ -158,7 +178,7 @@ function Home() {
                             </div>
                             <h5>{item.likes.length} likes</h5>
                             <h4>
-                                <Link to={`/profile/${item.postedBy._id}`}>
+                                <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}` : "/profile"}>
                                     {item.postedBy.name}
                                 </Link>
                                 

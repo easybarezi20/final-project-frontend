@@ -4,3 +4,19 @@
     height: 92vh;
     overflow: hidden;
 }
+.explore-content{
+    border: 1px solid blue;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: max-content;
+    height: 85vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.content-container{
+    /* border: 1px solid red; */
+    height: 30vh;
+}
+.image-photo-explore{
+    height: 100%;
+}
