@@ -9,27 +9,7 @@ function Post() {
     const [ body, setBody ] = useState("")
     const [ image, setImage ] = useState("")
     const [ url, setURL ] = useState("")
-    useEffect(() => {
-        if(url){
-            fetch('http://localhost:4000/posts/createpost',{
-                method: "POST",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization":"Bearer " + localStorage.getItem("jwt")
-                },
-                body:JSON.stringify({
-                    title,
-                    body,
-                    photo:url,
-                })
-            }).then(res => res.json())
-            .then(data =>{
-                console.log(data);
-                navigate('/')
-            })
-        }
-    }, [url])
-
+    
     const postDetails = () => {
         const data = new FormData()
         data.append("file", image)
@@ -47,6 +27,26 @@ function Post() {
             console.log(err);
         }) 
     }
+    useEffect(() => {
+        if(url){
+            fetch('https://radiant-harbor-76606.herokuapp.com/posts/createpost',{
+                method: "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer " + localStorage.getItem("jwt")
+                },
+                body:JSON.stringify({
+                    title,
+                    body,
+                    photo:url,
+                })
+            }).then(res => res.json())
+            .then(data =>{
+                console.log(data);
+                navigate('/')
+            })
+        }
+    }, [url])
   return (
     <div className='post'>
         <div className='post-container'>

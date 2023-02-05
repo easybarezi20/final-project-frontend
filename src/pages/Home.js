@@ -9,7 +9,7 @@ function Home() {
     const {state, dispatch} = useContext(UserContext)
 
     const getFollowingPosts = () => {
-        fetch('http://localhost:4000/posts/getfollowpost',{
+        fetch('https://radiant-harbor-76606.herokuapp.com/posts/getfollowpost',{
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem("jwt")
             }
@@ -20,7 +20,7 @@ function Home() {
         })
     }
     const getAllPosts = () => {
-        fetch('http://localhost:4000/posts/allpost',{
+        fetch('https://radiant-harbor-76606.herokuapp.com/posts/allpost',{
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem("jwt")
             }
@@ -31,7 +31,7 @@ function Home() {
     }
 
     const likePost = (id) =>{
-        fetch("http://localhost:4000/posts/like",{
+        fetch("https://radiant-harbor-76606.herokuapp.com/posts/like",{
             method: "PUT",
             headers:{
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function Home() {
         })
     }
     const unlikePost = (id) =>{
-        fetch("http://localhost:4000/posts/unlike",{
+        fetch("https://radiant-harbor-76606.herokuapp.com/posts/unlike",{
             method: "PUT",
             headers:{
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ function Home() {
     }
 
     const makeComment = (text, postId) => {
-        fetch("http://localhost:4000/posts/comment",{
+        fetch("https://radiant-harbor-76606.herokuapp.com/posts/comment",{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",
@@ -109,7 +109,7 @@ function Home() {
     }
 
     const deletePost = (postId) => {
-        fetch(`http://localhost:4000/posts/deletepost/${postId}`,{
+        fetch(`https://radiant-harbor-76606.herokuapp.com/posts/deletepost/${postId}`,{
             method:"DELETE",
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem("jwt")
@@ -124,14 +124,13 @@ function Home() {
                 setPosts(newData)
         })
     }
-    console.log(state);
     useEffect(() => {
         if(state.following.length === 0 && state != null){
             getAllPosts()
         }else{
             getFollowingPosts()
         }
-    },[])
+    },[posts])
   return (
     <div className='home'>
         <div className='home-title'>

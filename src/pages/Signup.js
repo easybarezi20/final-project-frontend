@@ -9,7 +9,7 @@ function Signup() {
     const [ image, setImage ] = useState("")
     const [ url, setURL ] = useState(undefined)
 
-    const testURL = "http://www.localhost:4000/user/signup"
+    const testURL = "https://radiant-harbor-76606.herokuapp.com/user/signup"
     const deployURL = ""
 
     useEffect(() =>{

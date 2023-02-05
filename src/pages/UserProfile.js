@@ -9,7 +9,7 @@ function UserProfile() {
     const { id } = useParams()
     const [ showFollow, setShowFollow ] = useState(state? !state.following.includes(id) : true)
     useEffect(() => {
-        fetch(`http://localhost:4000/getuser/user/${id}`,{
+        fetch(`https://radiant-harbor-76606.herokuapp.com/getuser/user/${id}`,{
             method:"GET",
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem('jwt')
@@ -22,7 +22,7 @@ function UserProfile() {
     },[])
 
     const followUser = () => {
-        fetch('http://localhost:4000/getuser/follow',{
+        fetch('https://radiant-harbor-76606.herokuapp.com/getuser/follow',{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",
@@ -49,7 +49,7 @@ function UserProfile() {
         })
     }
     const unfollowUser = () => {
-        fetch('http://localhost:4000/getuser/unfollow',{
+        fetch('https://radiant-harbor-76606.herokuapp.com/getuser/unfollow',{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",

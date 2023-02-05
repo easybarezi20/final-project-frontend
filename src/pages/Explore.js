@@ -8,7 +8,7 @@ function Explore() {
     const [ posts, setPosts ] = useState([])
     const {state, dispatch} = useContext(UserContext)
     useEffect(() => {
-        fetch('http://localhost:4000/posts/allpost',{
+        fetch('https://radiant-harbor-76606.herokuapp.com/posts/allpost',{
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem("jwt")
             }

@@ -24,7 +24,7 @@ function Profile() {
             })
             .then(res => res.json())
             .then(data => {
-                fetch("http://localhost:4000/getuser/updatepic",{
+                fetch("https://radiant-harbor-76606.herokuapp.com/getuser/updatepic",{
                     method:"PUT",
                     headers:{
                         "Content-Type":"application/json",
@@ -46,9 +46,9 @@ function Profile() {
             }
     },[image])
 
-
+    console.log(state);
     useEffect(() => {
-        fetch("http://localhost:4000/posts/mypost",{
+        fetch("https://radiant-harbor-76606.herokuapp.com/posts/mypost",{
             headers:{
                 "Authorization":"Bearer " + localStorage.getItem('jwt')
             }
@@ -73,11 +73,11 @@ function Profile() {
                 Posts
             </div>
             <div>
-                <p>{state.followers != undefined && null ?state.followers.length : "0"}</p>
+                <p>{state.followers ?state.followers.length : "0"}</p>
                 Followers
             </div>
             <div>
-                <p>{state.following != undefined && null ?state.following.length : "0"}</p>
+                <p>{state.following ?state.following.length : "0"}</p>
                 Following
             </div>
         </div>
