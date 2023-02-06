@@ -1,10 +1,19 @@
 .post{
     color: white;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 92vh;
+    text-align: center;
 }
 .post-container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 90px 20px 20px 20px;
     height: 65vh;
+}
+.create-post-input{
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: center;
 }

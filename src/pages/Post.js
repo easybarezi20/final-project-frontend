@@ -50,25 +50,27 @@ function Post() {
   return (
     <div className='post'>
         <div className='post-container'>
+            <h3>Title</h3>
             <input
                 type='text'
-                placeholder="title"
+                placeholder="Type here"
+                className='create-post-input'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
+            <h3>Caption</h3>
             <input 
                 type='text'
-                placeholder="caption"
+                placeholder="Type here"
+                className='create-post-input caption'
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
             />
+            <h3>Image</h3>
             <input 
                 type='file'
                 onChange={(e) => setImage(e.target.files[0])}
             />
-            <div>
-                <input type="text"/>
-            </div>
             <button 
                 onClick={() => postDetails()}
             >

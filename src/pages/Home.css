@@ -35,3 +35,23 @@
 .delete-button{
     margin-right: 5px;
 }
+.posts-content{
+    /* border: 1px solid red; */
+    margin: 10px 0;
+}
+.comment-name{
+    color: aqua;
+}
+.post-caption{
+    font-size: 20px;
+}
+.post-comments{
+    font-size: 15px;
+}.post-comment-input{
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid grey !important;
+    background: transparent;
+    color: white;
+    border: none;
+}

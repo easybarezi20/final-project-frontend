@@ -140,7 +140,7 @@ function Home() {
             {
                 posts.map((item) =>{
                     return(
-                        <div key={item._id}>
+                        <div key={item._id} className='posts-content'>
                             <div className='home-header'>
                                 <div>
                                 <h4>Title: {item.title} </h4>
@@ -175,9 +175,12 @@ function Home() {
                                 }
                             </div>
                             <h5>{item.likes.length} likes</h5>
-                            <h4>
+                            <h4 className='post-caption'>
                                 <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}` : "/profile"}>
-                                    {item.postedBy.name}
+                                    <span className='comment-name'>
+                                    {item.postedBy.name} 
+                                    </span>
+                                    
                                 </Link>
                                 
                                 :
@@ -185,7 +188,10 @@ function Home() {
                             {
                                 item.comments.map(comment =>{
                                     return(
-                                        <h6>{comment.postedBy.name}- {comment.text}</h6>
+                                        <h6
+                                            className='post-comments'
+                                        >
+                                            {comment.postedBy.name}- {comment.text}</h6>
                                     )
                                 })
                             }
@@ -193,7 +199,9 @@ function Home() {
                                 e.preventDefault()
                                 makeComment(e.target[0].value, item._id);
                             }}>
-                                <input type="text" placeholder='add a comment'/>
+                                <input type="text" placeholder='add a comment'
+                                className='post-comment-input'
+                                />
                             </form>
                         </div>
                     )

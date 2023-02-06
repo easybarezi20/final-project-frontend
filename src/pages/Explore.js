@@ -23,7 +23,7 @@ function Explore() {
   return (
     <div className='home'>
     <div className='home-title'>
-        <p>Search bar</p>
+        <p>Explore</p>
     </div>
     <div className='explore-content'>
         {
