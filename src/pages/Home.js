@@ -15,6 +15,7 @@ function Home() {
             }
         }).then(res => res.json())
         .then(result => {
+            // console.log(result);
             setPosts(result.posts)
         })
     }
@@ -66,6 +67,7 @@ function Home() {
             })
         }).then(res => res.json())
         .then(result => {
+            // console.log(result);
             const newData = posts.map(item => {
                 if(item._id == result._id){
                     return result
@@ -122,13 +124,13 @@ function Home() {
                 setPosts(newData)
         })
     }
+    console.log(posts);
     useEffect(() => {
-        if(state.following.length === 0 && state != null){
-            getAllPosts()
-        }else{
-            getFollowingPosts()
-        }
-    },[posts])
+            
+                getAllPosts()
+  
+   
+    },[])
   return (
     <div className='home'>
         <div className='home-title'>
@@ -183,17 +185,16 @@ function Home() {
                                 
                                 :
                                  {item.body}</h4>
-                            {
+                            {/* {
                                 item.comments.map(comment =>{
                                     return(
                                         <h6
                                             className='post-comments'
-                                            key={comment.text}
                                         >
                                             {comment.postedBy.name}- {comment.text}</h6>
                                     )
                                 })
-                            }
+                            } */}
                             <form onSubmit={(e) =>{
                                 e.preventDefault()
                                 makeComment(e.target[0].value, item._id);

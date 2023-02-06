@@ -2,7 +2,7 @@
 
 # Finstagram
 #### By Barezi Morales
-#### [Finstagram Website](https://finstagram-bld.netlify.app/login)
+#### [Finstagram Website](https://reliable-capybara-1b3613.netlify.app/login)
 
 
 ## Getting Started

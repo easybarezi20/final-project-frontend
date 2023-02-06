@@ -10,6 +10,7 @@ function Login() {
   const [ password, setPassword ] = useState("")
 
   const testURL = "https://radiant-harbor-76606.herokuapp.com/user/signin"
+    const deployURL = ""
 
     const loginAuth = () => {
         fetch(testURL, {
@@ -26,6 +27,7 @@ function Login() {
             localStorage.setItem("jwt", data.token)
             localStorage.setItem("user", JSON.stringify(data.user))
             dispatch({type:"USER", payload:data.user})
+            console.log(localStorage.getItem("jwt"));
             if(data.token === undefined){
               localStorage.clear()
               navigate('/login')

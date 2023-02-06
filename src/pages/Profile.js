@@ -35,6 +35,7 @@ function Profile() {
                     })
                 }).then(res => res.json())
                 .then(result =>{
+                    console.log(result);
                     localStorage.setItem("user", JSON.stringify({...state, pic:result.pic}))
                     dispatch({type:"UPDATEPIC", payload:result.pic})
                 })
@@ -45,6 +46,7 @@ function Profile() {
             }
     },[image])
 
+    console.log(state);
     useEffect(() => {
         fetch("https://radiant-harbor-76606.herokuapp.com/posts/mypost",{
             headers:{
@@ -52,9 +54,11 @@ function Profile() {
             }
         }).then(res => res.json())
         .then(result => {
+            console.log(result.mypost);
             setMyPosts(result.mypost)
         })
     },[])
+    // const objLen = Object.keys(myposts).length
   return (
     <div className='profile'>
         <div className='username'>
