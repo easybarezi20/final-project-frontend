@@ -124,7 +124,7 @@ function Home() {
                 setPosts(newData)
         })
     }
-    console.log(posts);
+ 
     useEffect(() => {
         if(state.following.length === 0 && state != null){
             getAllPosts()
