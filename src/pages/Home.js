@@ -126,10 +126,11 @@ function Home() {
     }
     console.log(posts);
     useEffect(() => {
-            
-                getAllPosts()
-  
-   
+        if(state.following.length === 0 && state != null){
+            getAllPosts()
+        }else{
+            getFollowingPosts()
+        }
     },[])
   return (
     <div className='home'>
