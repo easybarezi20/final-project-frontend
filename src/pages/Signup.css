@@ -1,10 +1,8 @@
 .signup{
     color: white;
-    /* border: 1px solid red; */
     height: 92vh;
 }
 .signup-form{
-    border: 1px solid red;
     margin: 90px 20px 20px 20px;
     height: 65vh;
 }

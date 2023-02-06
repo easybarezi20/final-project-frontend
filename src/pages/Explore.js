@@ -1,5 +1,4 @@
 import React,{ useState, useEffect, useContext } from 'react'
-import {Link} from 'react-router-dom'
 import { UserContext } from '../App'
 
 import './Explore.css'
@@ -14,7 +13,6 @@ function Explore() {
             }
         }).then(res => res.json())
         .then(result => {
-            // console.log(result);
             setPosts(result.posts)
         })
     },[])

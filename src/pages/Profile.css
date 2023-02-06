@@ -1,23 +1,19 @@
 .profile{
-    /* border: 1px solid red; */
     height: 92.2vh;
     color: white;
     overflow: hidden;
 }
 .username{
     font-size: 30px;
-    /* border: 1px solid red; */
     padding: 10px;
 }
 .information-box{
-    /* border:1px solid red; */
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     text-align: center;
     height: 15vh;
 }
 .profile-image{
-    /* border: 1px solid red; */
     border-radius: 50%;
     
 }
@@ -26,7 +22,6 @@
     
 }
 .posts{
-    /* border: 1px solid red; */
     height: fit-content;
     height: 64vh;
     display: grid;
@@ -37,7 +32,6 @@
 }
 .posts-container{
     height: 20vh;
-    /* border: 1px solid blue; */
 }
 .posts-photo{
     max-height: 100%;

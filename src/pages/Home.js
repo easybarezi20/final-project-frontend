@@ -15,7 +15,6 @@ function Home() {
             }
         }).then(res => res.json())
         .then(result => {
-            // console.log(result);
             setPosts(result.posts)
         })
     }
@@ -67,7 +66,6 @@ function Home() {
             })
         }).then(res => res.json())
         .then(result => {
-            // console.log(result);
             const newData = posts.map(item => {
                 if(item._id == result._id){
                     return result
@@ -190,6 +188,7 @@ function Home() {
                                     return(
                                         <h6
                                             className='post-comments'
+                                            key={comment.text}
                                         >
                                             {comment.postedBy.name}- {comment.text}</h6>
                                     )
