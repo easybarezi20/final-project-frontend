@@ -6,7 +6,7 @@
 
 
 ## Getting Started
-Welcome to Finstagram! Finstagram may sound familure to the popular social media platform but it is far from it. <br>
+Welcome to Finstagram! Finstagram may sound familiar to the popular social media platform but it is far from it. <br>
 Right from the beginning you are prompted to log in or sign up(please not if the log in page or sign up doesnt load on first try reload page)
 <br>
 Once signed in users can see their home page which showcases either post from followers they followed or if its your first time then it will display all post made on the app.
@@ -17,10 +17,113 @@ The create page allows users to uplaod their own photos off their devices as wel
 <br>
 Finally the profile page is where you will be able to see all the post youve made as well as how many people follow you and how may people you follow.
 
-## Wireframe
-##### Main Page
-###### the main page, where users can view all post or follwing account posts
-<img width="700" hieght="auto" src="https://imgur.com/2mwES8o" alt="mainpage">
+## Code Snippets
+#### Singup Code
+```
+    router.post("/signup", (req, res) => {
+    const { name, email, password, pic} = req.body
+    if(!email || !password || !name){
+       return res.status(422).json({error: "please add all the fields"})
+    }
+    User.findOne({email:email})
+    .then((savedUser) => {
+        if(savedUser){
+            return res.status(422).json({error: "user already exists with that email"})
+        }
+        bcrypt.hash(password, 12)
+        .then(hashedpassword => {
+            const user = new User({
+                email,
+                password: hashedpassword,
+                name,
+                pic:pic
+            })
+    
+            user.save()
+            .then(user => {
+                res.json({message: "saved successfully"})
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
+})
+```
+#### Login Code
+```
+    router.post('/signin', (req, res) => {
+    const {email, password} = req.body
+    if(!email || !password){
+       return res.status(422).json({error:"please add email or password"})
+    }
+    User.findOne({email:email})
+    .then(savedUser => {
+        if(!savedUser){
+           return res.status(422).json({error:"Invalid email or password"})
+        }
+        bcrypt.compare(password, savedUser.password)
+        .then(doMatch => {
+            if(doMatch){
+                // res.json({message: "successfully signed in"})
+                const token = jwt.sign({_id:savedUser._id}, JWT_SECRET)
+                const{ _id, name, email, followers, following, pic } = savedUser
+                res.json({token, user:{_id, name, email, followers, following, pic}})
+            }
+            else{
+                return res.status(422).json({error:"Invalid email or password"})
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    })
+})
+```
+#### Cloud Posting
+```
+        const postDetails = () => {
+        const data = new FormData()
+        data.append("file", image)
+        data.append("upload_preset", "final-project")
+        data.append("cloud_name", "dayu9uhsv")
+        fetch("http://api.cloudinary.com/v1_1/dayu9uhsv/image/upload", {
+            method:"POST",
+            body:data
+        })
+        .then(res => res.json())
+        .then(data => {
+            setURL(data.url)
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
+    }
+    useEffect(() => {
+        if(url){
+            fetch('https://radiant-harbor-76606.herokuapp.com/posts/createpost',{
+                method: "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer " + localStorage.getItem("jwt")
+                },
+                body:JSON.stringify({
+                    title,
+                    body,
+                    photo:url,
+                })
+            }).then(res => res.json())
+            .then(data =>{
+                console.log(data);
+                navigate('/')
+            })
+        }
+    }, [url])
+```
+
 
 ## Technologies Used
 
