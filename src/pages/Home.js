@@ -131,7 +131,7 @@ function Home() {
         }else{
             getFollowingPosts()
         }
-    },[])
+    },[posts])
   return (
     <div className='home'>
         <div className='home-title'>
