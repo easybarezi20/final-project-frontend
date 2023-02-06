@@ -186,16 +186,16 @@ function Home() {
                                 
                                 :
                                  {item.body}</h4>
-                            {/* {
+                            {
                                 item.comments.map(comment =>{
                                     return(
                                         <h6
                                             className='post-comments'
                                         >
-                                            {comment.postedBy.name}- {comment.text}</h6>
+                                             {comment.text}</h6>
                                     )
                                 })
-                            } */}
+                            }
                             <form onSubmit={(e) =>{
                                 e.preventDefault()
                                 makeComment(e.target[0].value, item._id);
